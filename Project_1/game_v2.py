@@ -6,21 +6,20 @@ import numpy as np
 
 
 def random_predict(number: int = 1) -> int:
-    """Рандомно угадываем число
-
-    Args:
-        number (int, optional): Загаданное число. Defaults to 1.
-
-    Returns:
-        int: Число попыток
-    """
+    limit_a = 0
     count = 0
-
-    while True:
+    limit_b = 101
+    predict = np.random.randint(limit_a, limit_b)
+    
+    while number != predict:
         count += 1
-        predict_number = np.random.randint(1, 101)  # предполагаемое число
-        if number == predict_number:
-            break  # выход из цикла если угадали
+        if number > predict:
+            limit_a = predict
+            predict = np.random.randint(limit_a, limit_b)
+
+        elif number < predict:
+            limit_b = predict
+            predict = np.random.randint(limit_a, limit_b)
     return count
 
 
